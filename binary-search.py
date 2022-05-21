@@ -1,4 +1,4 @@
-def binary_search_v2(arr, l, r, target):
+def binary_search(arr, l, r, target):
     while l <= r:
         mid = l + (r - l) // 2
         if target == arr[mid]:
@@ -13,7 +13,7 @@ def binary_search_v2(arr, l, r, target):
 def main():
     arr = [1, 2, 3, 4, 5]
     target = 5
-    print(binary_search_v2(arr, 0, len(arr) - 1, target))
+    print(binary_search(arr, 0, len(arr) - 1, target))
 
 
 if __name__ == "__main__":
