@@ -1,3 +1,4 @@
+import heapq
 from typing import List
 
 
@@ -5,14 +6,19 @@ class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         count = {}
         for n in nums:
-            if n in count:
-                count[n] += 1
+            count[n] = count.get(n, 0) + 1
+
+        heap = []
+
+        for num, freq in count.items():
+            if len(heap) < k:
+                heapq.heappush(heap, (freq, num))
             else:
-                count[n] = 1
+                heapq.heappop(heap)
+                heapq.heappush(heap, (freq, num))
+        return [num for freq, num in heap]
 
-        return list(sorted(count, key=lambda x: count[x], reverse=True))[:k]
 
+nums = [2, 2, 2, 1, 1, 1, 3, 4, 4, 4]
 
-nums = [1, 2, 3, 3, 3, 4, 4, 4, 4, 4]
-
-print(Solution().topKFrequent(nums, k=1))
+print(Solution().topKFrequent(nums, k=2))
